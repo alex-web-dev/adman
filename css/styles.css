@@ -1035,12 +1035,13 @@ li {
   }
 
   .header__support-button {
-    display: none;
+    width: 36px;
+    height: 36px;
   }
 
   .header__login-button {
-    padding-top: 9px;
-    padding-bottom: 9px;
+    padding-top: 7px;
+    padding-bottom: 7px;
   }
 
   .header__balance-button {
