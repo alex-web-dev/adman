@@ -1032,11 +1032,6 @@ li {
   .header__support-button {
     width: 36px;
     height: 36px;
-    display: none;
-  }
-
-  .header__actions--logged .header__support-button {
-    display: flex;
   }
 
   .header__login-button {
