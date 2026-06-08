@@ -7,7 +7,7 @@
     <link rel="shortcut icon" href="img/favicon.png" />
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/styles.css?v=2" />
     <title>Дата-центр Адман</title>
   </head>
 
@@ -30,10 +30,10 @@
       <div class="header__content">
         <div class="container">
           <div class="header__top">
-            <a class="header__logo" href="/">
+            <a class="header__logo" href="index.html">
               <img class="header__logo-img" src="img/logo.svg" alt="Logo" />
             </a>
-            <a class="button button--dark-500 button--outline header__doc-button" href="#">
+            <a class="button button--dark-500 button--outline header__doc-button header__doc-button--logged" href="#">
               <img class="button__icon" src="img/icons/doc-white.svg" alt="" />
               <span class="button__text">Документация</span>
             </a>
@@ -63,7 +63,6 @@
                       stroke-linejoin="round" />
                   </svg>
                 </button>
-
                 <ul class="user-menu__dropdown dropdown-menu">
                   <li class="user-menu__dropdown-item">
                     <a class="text text--white text--sm user-menu__dropdown-link" href="#">Личный кабинет</a>
@@ -76,13 +75,16 @@
                   </li>
                 </ul>
               </div>
+              <button class="button button--dark-500 header__menu-button js-open-menu">
+                <span class="menu-icon"></span>
+              </button>
             </div>
           </div>
 
           <nav class="header__nav">
             <ul class="header__menu">
               <li class="header__menu-item">
-                <a class="button button--dropdown header__menu-link" href="#">
+                <a class="button button--dropdown header__menu-link" href="index.html">
                   <span>Главная</span>
                 </a>
               </li>
@@ -1377,10 +1379,6 @@
                     <img class="button__icon" src="img/icons/support-white.svg" alt="" />
                     Поддержка
                   </a>
-                  <a href="#" class="button button--primary footer__button">
-                    <img class="button__icon" src="img/icons/login-white.svg" alt="" />
-                    Вход
-                  </a>
                 </div>
 
                 <div class="footer__socials footer__socials--desktop">
@@ -1558,16 +1556,94 @@
         <div class="mobile-menu__main">
           <ul class="mobile-menu__list">
             <li class="mobile-menu__item">
-              <a class="text text--white mobile-menu__link" href="#">Главная</a>
+              <a class="text text--white mobile-menu__link" href="index.html">Главная</a>
             </li>
-            <li class="mobile-menu__item">
-              <a class="text text--white mobile-menu__link" href="#">Хостинг</a>
+            <li class="mobile-menu__item mobile-menu__item--has-submenu">
+              <button class="text text--white mobile-menu__link mobile-menu__link--toggle js-submenu-toggle" aria-expanded="false">
+                Хостинг
+                <span class="mobile-menu__arrow">
+                  <svg width="13" height="7" viewBox="0 0 13 7" fill="none">
+                    <path
+                      d="M11.31 0.75L6.96333 5.09667C6.45 5.61 5.61 5.61 5.09667 5.09667L0.75 0.75"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"></path>
+                  </svg>
+                </span>
+              </button>
+              <ul class="mobile-menu__submenu">
+                <li class="mobile-menu__subitem">
+                  <a class="text text--white mobile-menu__sublink" href="#">Виртуальный хостинг</a>
+                </li>
+                <li class="mobile-menu__subitem">
+                  <a class="text text--white mobile-menu__sublink" href="#">1С облако</a>
+                </li>
+                <li class="mobile-menu__subitem">
+                  <a class="text text--white mobile-menu__sublink" href="#">Регистрация домена</a>
+                </li>
+                <li class="mobile-menu__subitem">
+                  <a class="text text--white mobile-menu__sublink" href="#">SSL сертификаты</a>
+                </li>
+              </ul>
             </li>
-            <li class="mobile-menu__item">
-              <a class="text text--white mobile-menu__link" href="#">Сервер</a>
+            <li class="mobile-menu__item mobile-menu__item--has-submenu">
+              <button class="text text--white mobile-menu__link mobile-menu__link--toggle js-submenu-toggle" aria-expanded="false">
+                Сервер
+                <span class="mobile-menu__arrow">
+                  <svg width="13" height="7" viewBox="0 0 13 7" fill="none">
+                    <path
+                      d="M11.31 0.75L6.96333 5.09667C6.45 5.61 5.61 5.61 5.09667 5.09667L0.75 0.75"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"></path>
+                  </svg>
+                </span>
+              </button>
+              <ul class="mobile-menu__submenu">
+                <li class="mobile-menu__subitem">
+                  <a class="text text--white mobile-menu__sublink" href="#">Виртуальный хостинг</a>
+                </li>
+                <li class="mobile-menu__subitem">
+                  <a class="text text--white mobile-menu__sublink" href="#">1С облако</a>
+                </li>
+                <li class="mobile-menu__subitem">
+                  <a class="text text--white mobile-menu__sublink" href="#">Регистрация домена</a>
+                </li>
+                <li class="mobile-menu__subitem">
+                  <a class="text text--white mobile-menu__sublink" href="#">SSL сертификаты</a>
+                </li>
+              </ul>
             </li>
-            <li class="mobile-menu__item">
-              <a class="text text--white mobile-menu__link" href="#">Услуги</a>
+            <li class="mobile-menu__item mobile-menu__item--has-submenu">
+              <button class="text text--white mobile-menu__link mobile-menu__link--toggle js-submenu-toggle" aria-expanded="false">
+                Услуги
+                <span class="mobile-menu__arrow">
+                  <svg width="13" height="7" viewBox="0 0 13 7" fill="none">
+                    <path
+                      d="M11.31 0.75L6.96333 5.09667C6.45 5.61 5.61 5.61 5.09667 5.09667L0.75 0.75"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"></path>
+                  </svg>
+                </span>
+              </button>
+              <ul class="mobile-menu__submenu">
+                <li class="mobile-menu__subitem">
+                  <a class="text text--white mobile-menu__sublink" href="#">Виртуальный хостинг</a>
+                </li>
+                <li class="mobile-menu__subitem">
+                  <a class="text text--white mobile-menu__sublink" href="#">1С облако</a>
+                </li>
+                <li class="mobile-menu__subitem">
+                  <a class="text text--white mobile-menu__sublink" href="#">Регистрация домена</a>
+                </li>
+                <li class="mobile-menu__subitem">
+                  <a class="text text--white mobile-menu__sublink" href="#">SSL сертификаты</a>
+                </li>
+              </ul>
             </li>
             <li class="mobile-menu__item">
               <a class="text text--white mobile-menu__link" href="#">Акции и бонусы</a>
@@ -1583,10 +1659,6 @@
             </li>
           </ul>
           <div class="mobile-menu__btns">
-            <a class="button button--primary mobile-menu__login-button" href="#">
-              <img class="button__icon" src="img/icons/login-white.svg" alt="" />
-              <span class="button__text">Вход</span>
-            </a>
             <a class="button button--dark-500 button--outline mobile-menu__doc-button" href="#">
               <img class="button__icon" src="img/icons/doc-white.svg" alt="" />
               <span class="button__text">Документация</span>
@@ -1606,6 +1678,6 @@
 
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/swiper-bundle.min.js"></script>
-    <script src="js/index.js"></script>
+    <script src="js/index.js?v=2"></script>
   </body>
 </html>

@@ -270,18 +270,6 @@ li {
   transform: translateY(5px);
 }
 
-.header__menu-button.is-active .menu-icon {
-  background: transparent;
-}
-
-.header__menu-button.is-active .menu-icon::before {
-  transform: rotate(-45deg);
-}
-
-.header__menu-button.is-active .menu-icon::after {
-  transform: rotate(45deg);
-}
-
 /* ========== .title ========== */
 .title {
   font-weight: 600;
@@ -978,8 +966,11 @@ li {
 }
 
 @media (max-width: 767px) {
+  .header__logo {
+    margin-right: auto;
+  }
+
   .header__doc-button {
-    margin-left: auto;
     padding: 0;
     width: 44px;
     height: 44px;
@@ -1034,9 +1025,18 @@ li {
     height: 36px;
   }
 
+  .header__doc-button--logged {
+    display: none;
+  }
+
   .header__support-button {
     width: 36px;
     height: 36px;
+    display: none;
+  }
+
+  .header__actions--logged .header__support-button {
+    display: flex;
   }
 
   .header__login-button {
@@ -2647,7 +2647,7 @@ li {
 }
 
 .mobile-menu__main {
-  padding: 32px 12px;
+  padding: 80px 12px 32px;
   flex: auto;
   display: flex;
   flex-direction: column;
@@ -2659,14 +2659,9 @@ li {
 }
 
 .mobile-menu__list {
-  margin: auto 0;
   padding-left: 0;
   display: flex;
   flex-direction: column;
-}
-
-.mobile-menu__submenu {
-  display: none;
 }
 
 .mobile-menu__item.is-open .mobile-menu__submenu {
@@ -2674,25 +2669,36 @@ li {
 }
 
 .mobile-menu__link {
-  padding: 11px 32px;
+  padding: 11px 24px;
   display: flex;
   justify-content: flex-start;
+  gap: 8px;
   width: 100%;
   text-align: left;
   line-height: 1.35;
 }
 
-.mobile-menu__item.is-open > .mobile-menu__link .ui-link__icon {
-  transform: rotate(180deg);
+.mobile-menu__arrow {
+  transition: transform 0.35s;
 }
 
-.mobile-menu__children {
-  padding-left: 20px;
-  display: none;
+.mobile-menu__link--toggle[aria-expanded="true"] .mobile-menu__arrow {
+  transform: rotate(-180deg);
 }
 
-.mobile-menu__item.is-open > .mobile-menu__children {
+.mobile-menu__submenu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.35s;
+}
+
+.mobile-menu__sublink {
   display: block;
+  padding: 8px 24px 8px 32px;
+  opacity: 0.7;
 }
 
 .mobile-menu__btns {

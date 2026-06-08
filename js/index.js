@@ -1,66 +1,91 @@
 /* Mobile menu */
-/* Mobile menu */
 initMobileMenu();
 
 function initMobileMenu() {
-  const $menu = document.querySelector(".js-mobile-menu");
-  const $backdrop = document.querySelector(".mobile-menu__backdrop");
+  const menu = document.querySelector(".js-mobile-menu");
+  const backdrop = document.querySelector(".mobile-menu__backdrop");
   const delay = 500;
 
-  if (!$menu || $menu.dataset.initialized) return;
-  $menu.dataset.initialized = "true";
+  if (!menu || menu.dataset.initialized) return;
+  menu.dataset.initialized = "true";
 
-  const $openBtns = document.querySelectorAll(".js-open-menu");
-  const $closeBtns = document.querySelectorAll(".js-close-menu");
+  const openBtns = document.querySelectorAll(".js-open-menu");
+  const closeBtns = document.querySelectorAll(".js-close-menu");
 
   let showTimeout = null;
 
   const handleToggle = () => {
-    const isOpen = $menu.classList.contains("mobile-menu--active");
+    const isOpen = menu.classList.contains("mobile-menu--active");
 
     clearTimeout(showTimeout);
 
     if (isOpen) {
-      closeMenu($menu, $openBtns);
+      closeMenu(menu, openBtns);
     } else {
-      openMenu($menu, $openBtns);
+      openMenu(menu, openBtns);
 
       showTimeout = setTimeout(() => {
-        $menu.classList.add("mobile-menu--show");
+        menu.classList.add("mobile-menu--show");
       }, delay);
     }
   };
 
-  $openBtns.forEach((btn) => {
+  openBtns.forEach((btn) => {
     btn.addEventListener("click", handleToggle);
   });
 
-  $closeBtns.forEach((btn) => {
+  closeBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
       clearTimeout(showTimeout);
-      closeMenu($menu, $openBtns);
+      closeMenu(menu, openBtns);
     });
   });
 
-  if ($backdrop) {
-    $backdrop.addEventListener("click", () => {
+  const submenuToggleBtns = document.querySelectorAll(".js-submenu-toggle");
+  submenuToggleBtns.forEach((toggle) => {
+    toggle.addEventListener("click", () => {
+      const $item = toggle.closest(".mobile-menu__item--has-submenu");
+      const $submenu = $item.querySelector(".mobile-menu__submenu");
+      const isOpen = $item.classList.contains("is-open");
+
+      // Закрыть все остальные
+      document.querySelectorAll(".mobile-menu__item--has-submenu.is-open").forEach((el) => {
+        const $s = el.querySelector(".mobile-menu__submenu");
+        $s.style.maxHeight = $s.scrollHeight + "px";
+        // Принудительный reflow чтобы transition сработал от текущего значения
+        $s.getBoundingClientRect();
+        $s.style.maxHeight = "0";
+        el.classList.remove("is-open");
+        el.querySelector(".js-submenu-toggle").setAttribute("aria-expanded", "false");
+      });
+
+      if (!isOpen) {
+        $submenu.style.maxHeight = $submenu.scrollHeight + "px";
+        $item.classList.add("is-open");
+        toggle.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+
+  if (backdrop) {
+    backdrop.addEventListener("click", () => {
       clearTimeout(showTimeout);
-      closeMenu($menu, $openBtns);
+      closeMenu(menu, openBtns);
     });
   }
 }
 
-function openMenu($menu, $openBtns) {
-  $menu.classList.add("mobile-menu--active");
+function openMenu(menu, openBtns) {
+  menu.classList.add("mobile-menu--active");
   document.documentElement.classList.add("is-lock");
-  $openBtns.forEach((btn) => btn.classList.add("is-active"));
+  openBtns.forEach((btn) => btn.classList.add("is-active"));
 }
 
-function closeMenu($menu, $openBtns) {
-  $menu.classList.remove("mobile-menu--active");
-  $menu.classList.remove("mobile-menu--show");
+function closeMenu(menu, openBtns) {
+  menu.classList.remove("mobile-menu--active");
+  menu.classList.remove("mobile-menu--show");
   document.documentElement.classList.remove("is-lock");
-  $openBtns.forEach((btn) => btn.classList.remove("is-active"));
+  openBtns.forEach((btn) => btn.classList.remove("is-active"));
 }
 
 /* Partners */
@@ -124,16 +149,16 @@ videoSections.forEach((videoSection) => {
 });
 
 function createVideo(url) {
-  const $video = document.createElement("video");
-  $video.classList.add("video__player");
+  const video = document.createElement("video");
+  video.classList.add("video__player");
 
-  $video.src = url;
-  $video.controls = true;
-  $video.playsInline = true;
-  $video.muted = true;
-  $video.preload = "metadata";
+  video.src = url;
+  video.controls = true;
+  video.playsInline = true;
+  video.muted = true;
+  video.preload = "metadata";
 
-  return $video;
+  return video;
 }
 
 /* Services */
