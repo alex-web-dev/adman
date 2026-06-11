@@ -877,7 +877,7 @@ li {
   margin-top: 7px;
   width: 100%;
   min-width: 173px;
-  padding: 6px 0;
+  padding: 8px 0;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -1098,7 +1098,7 @@ li {
 
 .user-menu__dropdown {
   list-style: none;
-  padding: 12px 0;
+  padding: 8px 0;
   margin: 0;
   width: 100%;
   min-width: 180px;
@@ -1107,12 +1107,21 @@ li {
 }
 
 .user-menu__dropdown-item + .user-menu__dropdown-item {
-  margin-top: 8px;
+  margin-top: 4px;
 }
 
 .user-menu__dropdown-link {
   display: block;
-  padding: 0 16px;
+  padding: 4px 16px;
+  transition: background 0.2s;
+}
+
+.user-menu__dropdown-link:hover {
+  background-color: color-mix(in srgb, var(--color-white) 8%, var(--color-dark-500));
+}
+
+.user-menu__dropdown-link:active {
+  background-color: color-mix(in srgb, var(--color-white) 12%, var(--color-dark-500));
 }
 
 @media (max-width: 991px) {
