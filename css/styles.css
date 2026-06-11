@@ -877,10 +877,10 @@ li {
   margin-top: 7px;
   width: 100%;
   min-width: 173px;
-  padding: 10px 0;
+  padding: 6px 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  overflow: hidden;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -913,8 +913,17 @@ li {
 }
 
 .header__submenu-link {
-  padding: 0 16px;
+  padding: 4px 16px;
   display: block;
+  transition: background 0.2s;
+}
+
+.header__submenu-link:hover {
+  background-color: color-mix(in srgb, var(--color-white) 8%, var(--color-dark-500));
+}
+
+.header__submenu-link:active {
+  background-color: color-mix(in srgb, var(--color-white) 12%, var(--color-dark-500));
 }
 
 .header__socials {
