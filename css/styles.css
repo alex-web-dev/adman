@@ -5290,7 +5290,6 @@ li {
   position: sticky;
   top: 24px;
   padding: 20px;
-  min-height: 620px;
   border-radius: 18px;
   background-color: var(--color-white);
 }

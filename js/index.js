@@ -233,6 +233,24 @@ document.addEventListener("DOMContentLoaded", initOsVersions, { once: true });
 
 /* Adaptive order summary */
 initAdaptiveOrderSummary();
+initOrderSummaryPeriod();
+
+function initOrderSummaryPeriod() {
+  const $summary = document.querySelector("[data-order-summary]");
+  const $periodOptions = $summary?.querySelector(".period-options");
+  const $periodInputs = $summary?.querySelectorAll('input[name="billing-period"]');
+
+  if (!$summary || !$periodOptions || !$periodInputs?.length || $summary.dataset.periodInitialized) return;
+
+  const updatePeriodOptions = () => {
+    const $selectedPeriod = $summary.querySelector('input[name="billing-period"]:checked');
+    $periodOptions.hidden = $selectedPeriod?.value !== "month";
+  };
+
+  $periodInputs.forEach(($input) => $input.addEventListener("change", updatePeriodOptions));
+  $summary.dataset.periodInitialized = "true";
+  updatePeriodOptions();
+}
 
 function initAdaptiveOrderSummary() {
   const $summary = document.querySelector("[data-order-summary]");
