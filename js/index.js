@@ -181,14 +181,15 @@ function initSelects() {
     if ($select.dataset.initialized) return;
 
     const $value = $select.querySelector(".select__value");
-    const $options = $select.querySelectorAll(".select__option");
 
-    if (!$value || !$options.length) return;
+    if (!$value) return;
 
-    $options.forEach(($option) => {
-      $option.addEventListener("click", () => {
-        $value.textContent = $option.dataset.selectValue || $option.textContent.trim();
-      });
+    $select.addEventListener("click", (event) => {
+      const $option = event.target.closest(".select__option[data-select-value]");
+
+      if (!$option || !$select.contains($option)) return;
+
+      $value.textContent = $option.dataset.selectValue;
     });
 
     $select.dataset.initialized = "true";
@@ -196,6 +197,73 @@ function initSelects() {
 }
 
 document.addEventListener("DOMContentLoaded", initSelects, { once: true });
+
+/* Project creation */
+function initProjectCreation() {
+  const $select = document.querySelector("[data-project-select]");
+  const $options = $select?.querySelector("[data-project-options]");
+  const $actionItem = $options?.querySelector("[data-project-action-item]");
+  const $action = $actionItem?.querySelector(".select__option");
+  const $value = $select?.querySelector(".select__value");
+  const $modal = document.querySelector("#add-project-modal");
+  const $form = $modal?.querySelector("[data-project-form]");
+  const $nameField = $form?.querySelector("[data-project-name-field]");
+  const $name = $form?.querySelector("[data-project-name]");
+  const $description = $form?.querySelector("[data-project-description]");
+  const $nameError = $form?.querySelector("[data-project-name-error]");
+
+  if (!$select || !$options || !$actionItem || !$action || !$value || !$modal || !$form || !$nameField || !$name || !$description || !$nameError) {
+    return;
+  }
+
+  const clearNameError = () => {
+    $nameField.classList.remove("input--error");
+    $name.removeAttribute("aria-invalid");
+    $nameError.hidden = true;
+  };
+
+  $name.addEventListener("input", clearNameError);
+
+  $form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const name = $name.value.trim();
+
+    if (!name) {
+      $nameField.classList.add("input--error");
+      $name.setAttribute("aria-invalid", "true");
+      $nameError.hidden = false;
+      $name.focus();
+      return;
+    }
+
+    const $projectItem = document.createElement("li");
+    const $projectOption = $action.cloneNode(true);
+    const $projectName = $projectOption.querySelector("span");
+
+    $projectOption.removeAttribute("data-bs-toggle");
+    $projectOption.removeAttribute("data-bs-target");
+    $projectOption.removeAttribute("aria-controls");
+    $projectOption.dataset.selectValue = name;
+    $projectOption.dataset.projectDescription = $description.value.trim();
+
+    if ($projectName) $projectName.textContent = name;
+
+    $projectItem.append($projectOption);
+    $actionItem.before($projectItem);
+    $value.textContent = name;
+
+    bootstrap.Modal.getOrCreateInstance($modal).hide();
+  });
+
+  $modal.addEventListener("shown.bs.modal", () => $name.focus());
+  $modal.addEventListener("hidden.bs.modal", () => {
+    $form.reset();
+    clearNameError();
+  });
+}
+
+document.addEventListener("DOMContentLoaded", initProjectCreation, { once: true });
 
 /* OS versions */
 function initOsVersions() {

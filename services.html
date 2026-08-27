@@ -2678,7 +2678,7 @@
                       <input class="input__field" id="server-comment" name="server-comment" type="text" />
                     </div>
 
-                    <div class="select dropdown">
+                    <div class="select dropdown" data-project-select>
                       <span class="select__label" id="server-project-label">Выбрать проект</span>
                       <button
                         class="select__trigger"
@@ -2692,7 +2692,7 @@
                             d="M14.25 8C14.25 8.19891 14.171 8.38968 14.0303 8.53033C13.8897 8.67098 13.6989 8.75 13.5 8.75H8.75V13.5C8.75 13.6989 8.67098 13.8897 8.53033 14.0303C8.38968 14.171 8.19891 14.25 8 14.25C7.80109 14.25 7.61032 14.171 7.46967 14.0303C7.32902 13.8897 7.25 13.6989 7.25 13.5V8.75H2.5C2.30109 8.75 2.11032 8.67098 1.96967 8.53033C1.82902 8.38968 1.75 8.19891 1.75 8C1.75 7.80109 1.82902 7.61032 1.96967 7.46967C2.11032 7.32902 2.30109 7.25 2.5 7.25H7.25V2.5C7.25 2.30109 7.32902 2.11032 7.46967 1.96967C7.61032 1.82902 7.80109 1.75 8 1.75C8.19891 1.75 8.38968 1.82902 8.53033 1.96967C8.67098 2.11032 8.75 2.30109 8.75 2.5V7.25H13.5C13.6989 7.25 13.8897 7.32902 14.0303 7.46967C14.171 7.61032 14.25 7.80109 14.25 8Z"
                             fill="currentColor" />
                         </svg>
-                        <span class="select__value" id="server-project-value">Общий проект</span>
+                        <span class="select__value" id="server-project-value">Проект не выбран</span>
                         <span class="select__meta">
                           <svg
                             class="select__arrow"
@@ -2712,25 +2712,20 @@
                           </svg>
                         </span>
                       </button>
-                      <ul class="select__menu dropdown-menu" aria-labelledby="server-project-label">
-                        <li>
-                          <button class="select__option dropdown-item" type="button" data-select-value="Общий проект" aria-pressed="true">
+                      <ul class="select__menu dropdown-menu" aria-labelledby="server-project-label" data-project-options>
+                        <li data-project-action-item>
+                          <button
+                            class="select__option dropdown-item"
+                            type="button"
+                            data-bs-toggle="modal"
+                            data-bs-target="#add-project-modal"
+                            aria-controls="add-project-modal">
                             <svg class="select__option-icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
                               <path
                                 d="M14.25 8C14.25 8.19891 14.171 8.38968 14.0303 8.53033C13.8897 8.67098 13.6989 8.75 13.5 8.75H8.75V13.5C8.75 13.6989 8.67098 13.8897 8.53033 14.0303C8.38968 14.171 8.19891 14.25 8 14.25C7.80109 14.25 7.61032 14.171 7.46967 14.0303C7.32902 13.8897 7.25 13.6989 7.25 13.5V8.75H2.5C2.30109 8.75 2.11032 8.67098 1.96967 8.53033C1.82902 8.38968 1.75 8.19891 1.75 8C1.75 7.80109 1.82902 7.61032 1.96967 7.46967C2.11032 7.32902 2.30109 7.25 2.5 7.25H7.25V2.5C7.25 2.30109 7.32902 2.11032 7.46967 1.96967C7.61032 1.82902 7.80109 1.75 8 1.75C8.19891 1.75 8.38968 1.82902 8.53033 1.96967C8.67098 2.11032 8.75 2.30109 8.75 2.5V7.25H13.5C13.6989 7.25 13.8897 7.32902 14.0303 7.46967C14.171 7.61032 14.25 7.80109 14.25 8Z"
                                 fill="currentColor" />
                             </svg>
-                            <span>Общий проект</span>
-                          </button>
-                        </li>
-                        <li>
-                          <button class="select__option dropdown-item" type="button" data-select-value="Placeholder">
-                            <svg class="select__option-icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
-                              <path
-                                d="M14.25 8C14.25 8.19891 14.171 8.38968 14.0303 8.53033C13.8897 8.67098 13.6989 8.75 13.5 8.75H8.75V13.5C8.75 13.6989 8.67098 13.8897 8.53033 14.0303C8.38968 14.171 8.19891 14.25 8 14.25C7.80109 14.25 7.61032 14.171 7.46967 14.0303C7.32902 13.8897 7.25 13.6989 7.25 13.5V8.75H2.5C2.30109 8.75 2.11032 8.67098 1.96967 8.53033C1.82902 8.38968 1.75 8.19891 1.75 8C1.75 7.80109 1.82902 7.61032 1.96967 7.46967C2.11032 7.32902 2.30109 7.25 2.5 7.25H7.25V2.5C7.25 2.30109 7.32902 2.11032 7.46967 1.96967C7.61032 1.82902 7.80109 1.75 8 1.75C8.19891 1.75 8.38968 1.82902 8.53033 1.96967C8.67098 2.11032 8.75 2.30109 8.75 2.5V7.25H13.5C13.6989 7.25 13.8897 7.32902 14.0303 7.46967C14.171 7.61032 14.25 7.80109 14.25 8Z"
-                                fill="currentColor" />
-                            </svg>
-                            <span>Placeholder</span>
+                            <span>Добавить проект</span>
                           </button>
                         </li>
                       </ul>
@@ -3112,6 +3107,62 @@
         </div>
       </div>
     </footer>
+
+    <div
+      class="modal fade app-modal"
+      id="add-project-modal"
+      tabindex="-1"
+      aria-labelledby="add-project-modal-title"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered app-modal__dialog">
+        <form class="modal-content app-modal__content project-modal" data-project-form novalidate>
+          <button class="project-modal__close" type="button" data-bs-dismiss="modal" aria-label="Закрыть">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path
+                d="M13.7208 2.27916C13.542 2.10042 13.2996 2 13.0467 2C12.7939 2 12.5514 2.10042 12.3726 2.27916L8 6.65179L3.62737 2.27916C3.44857 2.10042 3.2061 2 2.95327 2C2.70044 2 2.45797 2.10042 2.27916 2.27916C2.10042 2.45797 2 2.70044 2 2.95327C2 3.2061 2.10042 3.44857 2.27916 3.62737L6.65179 8L2.27916 12.3726C2.10042 12.5514 2 12.7939 2 13.0467C2 13.2996 2.10042 13.542 2.27916 13.7208C2.45797 13.8996 2.70044 14 2.95327 14C3.2061 14 3.44857 13.8996 3.62737 13.7208L8 9.34821L12.3726 13.7208C12.5514 13.8996 12.7939 14 13.0467 14C13.2996 14 13.542 13.8996 13.7208 13.7208C13.8996 13.542 14 13.2996 14 13.0467C14 12.7939 13.8996 12.5514 13.7208 12.3726L9.34821 8L13.7208 3.62737C13.8996 3.44857 14 3.2061 14 2.95327C14 2.70044 13.8996 2.45797 13.7208 2.27916Z"
+                fill="currentColor" />
+            </svg>
+          </button>
+
+          <h2 class="title title--5 title--montserrat title--bold project-modal__title" id="add-project-modal-title">
+            Добавить проект
+          </h2>
+
+          <div class="project-modal__fields">
+            <div class="input" data-project-name-field>
+              <div class="input__label-row">
+                <label class="text text--sm input__label" for="project-name">Имя</label>
+              </div>
+              <input
+                class="input__field"
+                id="project-name"
+                name="project-name"
+                type="text"
+                aria-describedby="project-name-error"
+                required
+                data-project-name />
+              <span class="input__error" id="project-name-error" hidden data-project-name-error>Укажите имя проекта</span>
+            </div>
+
+            <div class="input">
+              <div class="input__label-row">
+                <label class="text text--sm input__label" for="project-description">Описание</label>
+              </div>
+              <textarea
+                class="input__field input__field--area"
+                id="project-description"
+                name="project-description"
+                data-project-description></textarea>
+            </div>
+          </div>
+
+          <div class="project-modal__actions">
+            <button class="button button--light-100 project-modal__button" type="button" data-bs-dismiss="modal">Отмена</button>
+            <button class="button button--primary project-modal__button" type="submit">Добавить</button>
+          </div>
+        </form>
+      </div>
+    </div>
 
     <div
       class="modal fade app-modal order-summary-modal"
